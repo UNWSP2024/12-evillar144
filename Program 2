@@ -1,0 +1,35 @@
+import tkinter as tk
+
+window = tk.Tk()
+window.title("Joe's Automotive")
+
+services = [
+    ("Oil Change", 30),
+    ("Lube Job", 20),
+    ("Radiator Flush", 40),
+    ("Transmission Fluid", 100),
+    ("Inspection", 35),
+    ("Muffler Replacement", 200),
+    ("Tire Rotation", 20)
+]
+
+vars = []
+
+for text, price in services:
+    var = tk.IntVar()
+    cb = tk.Checkbutton(window, text=f"{text} - ${price}", variable=var)
+    cb.pack(anchor='w')
+    vars.append((var, price))
+
+total_label = tk.Label(window, text="Total: $0.00")
+total_label.pack(pady=10)
+
+# Calculate total cost
+def calculate_total():
+    total = sum(price for var, price in vars if var.get())
+    total_label.config(text=f"Total: ${total:.2f}")
+
+# Button to calculate total
+tk.Button(window, text="Calculate Total", command=calculate_total).pack(pady=5)
+
+window.mainloop()
