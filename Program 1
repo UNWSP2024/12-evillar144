@@ -1,0 +1,34 @@
+import tkinter as tk
+from tkinter import messagebox
+
+def calculate_mpg():
+    try:
+        gallons = float(gallons_entry.get())
+        miles = float(miles_entry.get())
+        if gallons <= 0:
+            raise ValueError("Gallons must be greater than zero.")
+        mpg = miles / gallons
+        result_label.config(text=f"Miles per Gallon (MPG): {mpg:.2f}")
+    except ValueError as e:
+        messagebox.showerror("Input Error", f"Invalid input: {e}")
+
+window = tk.Tk()
+window.title("Car Gas Mileage Calculator")
+window.geometry("300x200")
+
+tk.Label(window, text="Gallons of gas:").pack(pady=(10, 0))
+gallons_entry = tk.Entry(window)
+gallons_entry.pack()
+
+tk.Label(window, text="Miles on full tank:").pack(pady=(10, 0))
+miles_entry = tk.Entry(window)
+miles_entry.pack()
+
+calculate_button = tk.Button(window, text="Calculate MPG", command=calculate_mpg)
+calculate_button.pack(pady=10)
+
+result_label = tk.Label(window, text="Miles per Gallon (MPG): ")
+result_label.pack(pady=10)
+
+# Run the application
+window.mainloop()
